@@ -31,10 +31,10 @@ def close_popup():
     Closes a popup window that was opened with "Open Popup"
     """
     seleniumlib = BuiltIn().get_library_instance('Selenium2Library')
-    #This overrides any modal creation (e.g. "are you sure?")
     if not hasattr(seleniumlib, 'main_window'):
         raise UsageError('Popups must be opened with the same Selenium2Library'
                          ' instance before they can be closed')
+    #This overrides any modal creation (e.g. "are you sure?")
     seleniumlib.execute_javascript('window.onbeforeunload = function() {}')
     browser = seleniumlib._current_browser()
     logger.debug('Closing window: %s' % browser.current_window_handle)
